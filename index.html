@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15th Street Tavern | McPherson Square DC</title>
+    <style>
+        /* CSS Reset & Brand Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        :root {
+            --forest-green: #112a21;
+            --gold: #c5a059;
+            --cream: #fbf9f5;
+            --dark-charcoal: #222222;
+            --muted-gray: #666666;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--dark-charcoal);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: var(--forest-green);
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Using a clean, straight font variant for the brand name */
+        .logo {
+            color: var(--cream);
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Georgia', serif;
+            font-variant-numeric: lining-nums; /* Ensures numbers line up perfectly straight with text */
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav a {
+            color: var(--cream);
+            text-decoration: none;
+            margin-left: 25px;
+            font-family: 'Arial', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Banner - Featuring a stunning Steak Frites image to match the menu */
+        .hero {
+            height: 75vh;
+            background: linear-gradient(rgba(17, 42, 33, 0.6), rgba(17, 42, 33, 0.75)), 
+                        url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--cream);
+            padding: 0 20px;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 54px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            font-weight: normal;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-variant-numeric: lining-nums; /* Keeps numbers straight here as well */
+        }
+
+        .hero p {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: 35px;
+            max-width: 700px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+        }
+
+        .btn {
+            background-color: var(--gold);
+            color: var(--forest-green);
+            padding: 14px 40px;
+            text-decoration: none;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: var(--cream);
+            color: var(--forest-green);
+        }
+
+        /* Interactive Menu Section */
+        .menu-container {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: var(--forest-green);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-style: italic;
+            color: var(--muted-gray);
+            margin-bottom: 40px;
+        }
+
+        /* Menu Tabs Navigation */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            color: var(--muted-gray);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--forest-green);
+        }
+
+        .tab-btn.active {
+            color: var(--forest-green);
+            border-bottom: 3px solid var(--gold);
+            font-weight: bold;
+        }
+
+        /* Menu Content & Grid */
+        .menu-content {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px 60px;
+        }
+
+        .menu-content.active {
+            display: grid;
+        }
+
+        .menu-item {
+            margin-bottom: 15px;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .menu-item-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--forest-green);
+        }
+
+        .menu-item-price {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: var(--gold);
+            font-size: 16px;
+            padding-left: 10px;
+        }
+
+        .menu-item-desc {
+            font-size: 14px;
+            color: var(--muted-gray);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .menu-tag {
+            display: inline-block;
+            font-family: 'Arial', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            background-color: #eae7e1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+            letter-spacing: 0.5px;
+            color: var(--forest-green);
+        }
+
+        /* The Space Feature Section */
+        .space-section {
+            background-color: var(--white);
+            padding: 80px 20px;
+            border-top: 1px solid #eae7e1;
+            border-bottom: 1px solid #eae7e1;
+        }
+
+        .space-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .space-text {
+            flex: 1.1;
+        }
+
+        .space-image-container {
+            flex: 0.9;
+            text-align: center;
+        }
+
+        .space-image-container img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+            border: 1px solid #e2ded5;
+            background-color: #faf9f6;
+            padding: 10px;
+        }
+
+        .space-text h2 {
+            font-size: 32px;
+            color: var(--forest-green);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .space-text p {
+            color: var(--muted-gray);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .spec-item h4 {
+            color: var(--gold);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .spec-item p {
+            color: var(--dark-charcoal);
+            font-weight: bold;
+            font-size: 16px;
+            margin: 0;
+            font-variant-numeric: lining-nums;
+        }
+
+        /* Hours & Location Section */
+        .info-section {
+            background-color: var(--forest-green);
+            color: var(--cream);
+            padding: 70px 20px;
+            border-top: 3px solid var(--gold);
+        }
+
+        .info-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .info-box h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        .info-box p {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            color: #d1d9d6;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background-color: #0c1c16;
+            color: #888;
+            text-align: center;
+            padding: 25px;
+            font-family: 'Arial', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-top: 1px solid #1a2f29;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            nav {
+                margin-top: 10px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .space-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .menu-content {
+                grid-template-columns: 1fr;
+            }
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo">15TH STREET<span> TAVERN</span></div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#menu">The Menu</a>
+            <a href="#space">The Space</a>
+            <a href="#location">Hours & Location</a>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero" id="about">
+        <h1>15th Street Tavern</h1>
+        <p>Polished American classics served under 20-foot historic ceilings, just steps from the White House.</p>
+        <a href="#menu" class="btn">Explore the Menu</a>
+    </section>
+
+    <!-- Interactive Menu Section -->
+    <section class="menu-container" id="menu">
+        <h2 class="section-title">The Culinary Selection</h2>
+        <p class="section-subtitle">Ranked & voted favorites from our kitchen to your table.</p>
+
+        <!-- Menu Tabs Navigation -->
+        <div class="menu-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'entrees')">Entrées</button>
+            <button class="tab-btn" onclick="openTab(event, 'sandwiches')">Signature Sandwiches</button>
+            <button class="tab-btn" onclick="openTab(event, 'starters-veg')">Starters & Green</button>
+        </div>
+
+        <!-- TAB 1: ENTREES -->
+        <div id="entrees" class="menu-content active">
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Steak Frites</span>
+                    <span class="menu-item-price">$34</span>
+                </div>
+                <p class="menu-item-desc">Grilled prime ribeye topped with compound herb butter. Served alongside hand-cut golden fries and a dressed baby arugula salad.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Smokehouse Brisket Plate</span>
+                    <span class="menu-item-price">$28</span>
+                </div>
+                <p class="menu-item-desc">Tender sliced house-smoked brisket, rich BBQ glaze, pickled red onions, charred corn succotash, and baked white cheddar mac & cheese.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Beer-Battered Cod & Chips</span>
+                    <span class="menu-item-price">$22</span>
+                </div>
+                <p class="menu-item-desc">Crispy golden craft beer-battered Atlantic cod served with thick hand-cut fries, southern slaw, and house-made tangy tartar sauce.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Cajun Shrimp & Grits</span>
+                    <span class="menu-item-price">$26</span>
+                </div>
+                <p class="menu-item-desc">Plump, blackened gulf shrimp over a bed of stone-ground, creamy cheddar cheese grits, finished with a velvet Cajun butter sauce.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Fried Chicken Plate</span>
+                    <span class="menu-item-price">$24</span>
+                </div>
+                <p class="menu-item-desc">Crispy golden buttermilk-soaked fried chicken, garlic-herb mashed potatoes, house slaw, and a drizzle of spicy hot honey.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Chicken Parmesan</span>
+                    <span class="menu-item-price">$23</span>
+                </div>
+                <p class="menu-item-desc">Crispy herb-breaded chicken cutlet smothered in rustic marinara, melted fresh mozzarella, served over rigatoni pasta.</p>
+            </div>
+        </div>
+
+        <!-- TAB 2: SIGNATURE SANDWICHES -->
+        <div id="sandwiches" class="menu-content">
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Blue Crab Roll <span class="menu-tag">Signature</span></span>
+                    <span class="menu-item-price">$25</span>
+                </div>
+                <p class="menu-item-desc">Sweet, tender blue crab tossed gently in light lemon-chive mayo, served on a toasted, buttered split-top brioche roll.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Grilled Ribeye Steak Sandwich <span class="menu-tag">Signature</span></span>
+                    <span class="menu-item-price">$24</span>
+                </div>
+                <p class="menu-item-desc">Thinly sliced grilled ribeye, caramelized sweet onions, melted provolone, and garlic aioli on a toasted crusty baguette.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Smoked Brisket Sandwich <span class="menu-tag">Signature</span></span>
+                    <span class="menu-item-price">$19</span>
+                </div>
+                <p class="menu-item-desc">Our slow-smoked brisket, sweet BBQ glaze, and pickled onions on a toasted soft brioche bun.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Buttermilk Fried Chicken Sandwich <span class="menu-tag">Signature</span></span>
+                    <span class="menu-item-price">$17</span>
+                </div>
+                <p class="menu-item-desc">Crispy hand-battered chicken thigh, spicy mayo, and dill pickles on a toasted buttered bun.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Philly Cheesesteak</span>
+                    <span class="menu-item-price">$18</span>
+                </div>
+                <p class="menu-item-desc">Shaved griddled steak, grilled green bell peppers, onions, and gooey melted provolone or house cheese whiz.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Italian Beef Sandwich</span>
+                    <span class="menu-item-price">$18</span>
+                </div>
+                <p class="menu-item-desc">Slow-roasted spiced beef dipped in flavorful au jus, piled high with hot giardiniera on French bread.</p>
+            </div>
+        </div>
+
+        <!-- TAB 3: STARTERS & VEGETARIAN -->
+        <div id="starters-veg" class="menu-content">
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Cheesesteak Stuffed Peppers</span>
+                    <span class="menu-item-price">$14</span>
+                </div>
+                <p class="menu-item-desc">Tender bell pepper halves stuffed with finely shaved ribeye, caramelized onions, mushrooms, and melted provolone cheese.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Lump Crab Cakes</span>
+                    <span class="menu-item-price">$18</span>
+                </div>
+                <p class="menu-item-desc">Two house-made lump crab cakes pan-seared and served with fresh corn succotash, lemon aioli, and wild arugula.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Eggplant Parmesan <span class="menu-tag">V</span></span>
+                    <span class="menu-item-price">$19</span>
+                </div>
+                <p class="menu-item-desc">Crispy herb-crusted eggplant, slow-simmered marinara, fresh mozzarella, and sweet basil served over your choice of rigatoni or creamy polenta.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Chicken Caesar Salad <span class="menu-tag">Lighter Fare</span></span>
+                    <span class="menu-item-price">$16</span>
+                </div>
+                <p class="menu-item-desc">Crisp little gem lettuce, grilled chicken breast, shaved parmesan cheese, creamy house caesar dressing, and garlic breadcrumbs.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Grilled Cheese & Tomato Soup <span class="menu-tag">V</span></span>
+                    <span class="menu-item-price">$15</span>
+                </div>
+                <p class="menu-item-desc">Aged cheddar and Swiss cheese melted on thick golden-toasted sourdough. Served with a bowl of roasted tomato-basil soup.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Pulled Mushroom BBQ Sandwich <span class="menu-tag">V</span></span>
+                    <span class="menu-item-price">$16</span>
+                </div>
+                <p class="menu-item-desc">Tangy house-BBQ pulled king oyster mushrooms topped with fresh crunchy slaw and pickles on a toasted brioche bun.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-world Space Showcase -->
+    <section class="space-section" id="space">
+        <div class="space-container">
+            <div class="space-text">
+                <h2>The Historic Venue</h2>
+                <p>Located on the bustling corner of 15th and Eye St NW, 15th Street Tavern commands a stunning presence in the freshly renovated, historic Bowen Building. This landmark corner restaurant balances historic grandeur with open-concept modern styling.</p>
+                
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <h4>Total Footprint</h4>
+                        <p>± 3,842 Sq. Ft.</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Ceiling Height</h4>
+                        <p>Elevated 20' Ceilings</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Premium Feature</h4>
+                        <p>Direct Outdoor Patio</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Neighborhood Node</h4>
+                        <p>McPherson Square</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Image Display -->
+            <div class="space-image-container">
+                <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=800&q=80" alt="The Bowen Building Property Layout Placeholder">
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Real Location Section -->
+    <section class="info-section" id="location">
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>The Location</h3>
+                <p>The Bowen Building<br>875 15th St NW<br>Washington, DC 20005<br><small style="color: var(--gold);">(At McPherson Square Metro)</small></p>
+            </div>
+            <div class="info-box">
+                <h3>Dining Hours</h3>
+                <p>Mon - Thu: 11:30 AM - 10:00 PM<br>Fri - Sat: 11:30 AM - 11:00 PM<br>Sunday: 11:00 AM - 9:00 PM</p>
+            </div>
+            <div class="info-box">
+                <h3>Let's Connect</h3>
+                <p>Phone: (202) 555-0144<br>Email: events@15thstreettavern.com<br>Walk-ins welcome, reservations encouraged.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 15th Street Tavern. Created for Academic & Internship Presentation Purposes. All leasing data cited from Dochter & Alexander commercial listings.
+    </footer>
+
+    <!-- Interactive Tabs JS -->
+    <script>
+        function openTab(evt, categoryId) {
+            var i, menuContent, tabLinks;
+            menuContent = document.getElementsByClassName("menu-content");
+            for (i = 0; i < menuContent.length; i++) {
+                menuContent[i].classList.remove("active");
+            }
+
+            tabLinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+
+            document.getElementById(categoryId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+
+</body>
+</html>
