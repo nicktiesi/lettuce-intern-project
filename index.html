@@ -186,19 +186,16 @@
             margin-bottom: 40px;
         }
 
-        /* Centered Menu Tabs Navigation */
-        .menu-tabs-wrapper {
+        /* Cleaned Centered Menu Tabs Navigation */
+        .menu-tabs {
             width: 100%;
             border-bottom: 1px solid #ddd;
             margin-bottom: 50px;
             display: flex;
             justify-content: center;
-        }
-
-        .menu-tabs {
-            display: flex;
-            justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .tab-btn {
@@ -270,16 +267,6 @@
             color: var(--muted-gray);
             font-style: italic;
             line-height: 1.5;
-            margin-bottom: 6px;
-        }
-
-        .evolution-link {
-            font-family: 'Arial', sans-serif;
-            font-size: 11px;
-            text-transform: uppercase;
-            color: var(--gold);
-            font-weight: bold;
-            letter-spacing: 0.5px;
         }
 
         .menu-tag {
@@ -509,15 +496,13 @@
                 gap: 30px;
             }
 
-            .menu-tabs-wrapper {
-                justify-content: flex-start;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                padding: 0 10px;
+            .menu-tabs {
+                gap: 5px;
+                margin-bottom: 30px;
             }
             
             .tab-btn {
-                padding: 12px 20px;
+                padding: 10px 15px;
                 font-size: 12px;
             }
         }
@@ -539,7 +524,7 @@
     <main id="page-home" class="page-content active-page animate-fade-in">
         <section class="hero">
             <h1>15th Street Tavern</h1>
-            <p>A dual-concept culinary experience. Casual lunch signatures evolved into upscale dinner provisions.</p>
+            <p>A dual-concept culinary experience. Casual lunch signatures elevated into upscale dinner provisions.</p>
             <button class="btn" onclick="navigateTo('menu')">Explore the Menu</button>
         </section>
     </main>
@@ -548,15 +533,13 @@
     <main id="page-menu" class="page-content animate-fade-in">
         <section class="menu-container">
             <h2 class="section-title">The Culinary Selection</h2>
-            <p class="section-subtitle">Experience our signature lunch items evolved into upscale evening plates.</p>
+            <p class="section-subtitle">Experience our signature lunch selections alongside premium evening plates.</p>
 
-            <!-- Center Aligned Menu Selector -->
-            <div class="menu-tabs-wrapper">
-                <div class="menu-tabs">
-                    <button class="tab-btn active" onclick="openMenuTab(event, 'lunch')">Lunch Handhelds</button>
-                    <button class="tab-btn" onclick="openMenuTab(event, 'dinner')">Dinner Entrées</button>
-                    <button class="tab-btn" onclick="openMenuTab(event, 'beverages')">Tavern Bar & Drinks</button>
-                </div>
+            <!-- Center Aligned Menu Tabs Selector -->
+            <div class="menu-tabs">
+                <button class="tab-btn active" onclick="openMenuTab(event, 'lunch')">Lunch Handhelds</button>
+                <button class="tab-btn" onclick="openMenuTab(event, 'dinner')">Dinner Entrées</button>
+                <button class="tab-btn" onclick="openMenuTab(event, 'beverages')">Tavern Bar & Drinks</button>
             </div>
 
             <!-- TAB 1: LUNCH -->
@@ -567,7 +550,6 @@
                         <span class="menu-item-price">$24</span>
                     </div>
                     <p class="menu-item-desc">Thinly sliced grilled ribeye, caramelized sweet onions, melted provolone, and garlic aioli on a toasted crusty baguette.</p>
-                    <span class="evolution-link">→ Dinner Evolution: Steak Frites</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -575,7 +557,6 @@
                         <span class="menu-item-price">$19</span>
                     </div>
                     <p class="menu-item-desc">Our slow-smoked house brisket, sweet BBQ glaze, and pickled onions on a toasted soft brioche bun.</p>
-                    <span class="evolution-link">→ Dinner Evolution: Smokehouse Brisket Plate</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -583,7 +564,6 @@
                         <span class="menu-item-price">$25</span>
                     </div>
                     <p class="menu-item-desc">Sweet, tender blue crab tossed gently in light lemon-chive mayo on a toasted, buttered split-top brioche roll.</p>
-                    <span class="evolution-link">→ Dinner Evolution: Lump Crab Cakes</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -591,7 +571,6 @@
                         <span class="menu-item-price">$17</span>
                     </div>
                     <p class="menu-item-desc">Crispy hand-battered chicken thigh, spicy house mayo, and dill pickles on a toasted buttered bun.</p>
-                    <span class="evolution-link">→ Dinner Evolution: Fried Chicken Plate</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -599,7 +578,6 @@
                         <span class="menu-item-price">$18</span>
                     </div>
                     <p class="menu-item-desc">Shaved griddled ribeye, grilled green bell peppers, sweet caramelized onions, and gooey melted provolone.</p>
-                    <span class="evolution-link">→ Appetizer Evolution: Cheesesteak Stuffed Peppers</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -607,7 +585,6 @@
                         <span class="menu-item-price">$16</span>
                     </div>
                     <p class="menu-item-desc">Crispy herb-crusted eggplant, slow-simmered marinara, melted provolone, and fresh basil on a toasted ciabatta.</p>
-                    <span class="evolution-link">→ Dinner Evolution: Eggplant Parmesan Plate</span>
                 </div>
             </div>
 
@@ -619,7 +596,6 @@
                         <span class="menu-item-price">$34</span>
                     </div>
                     <p class="menu-item-desc">Grilled prime ribeye topped with compound herb butter. Served alongside hand-cut golden fries and a dressed baby arugula salad.</p>
-                    <span class="evolution-link">Evolved from: Grilled Ribeye Sandwich</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -627,7 +603,6 @@
                         <span class="menu-item-price">$28</span>
                     </div>
                     <p class="menu-item-desc">Tender sliced house-smoked brisket, rich BBQ glaze, pickled red onions, charred corn succotash, and baked white cheddar mac & cheese.</p>
-                    <span class="evolution-link">Evolved from: Smoked Brisket Sandwich</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -635,7 +610,6 @@
                         <span class="menu-item-price">$18</span>
                     </div>
                     <p class="menu-item-desc">Two pan-seared jumbo lump crab cakes served with warm fresh corn succotash, citrus-lemon aioli, and wild arugula.</p>
-                    <span class="evolution-link">Evolved from: Blue Crab Roll</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -643,7 +617,6 @@
                         <span class="menu-item-price">$24</span>
                     </div>
                     <p class="menu-item-desc">Crispy golden buttermilk-soaked fried chicken, garlic-herb mashed potatoes, house slaw, and a drizzle of spicy hot honey.</p>
-                    <span class="evolution-link">Evolved from: Buttermilk Fried Chicken Sandwich</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -651,7 +624,6 @@
                         <span class="menu-item-price">$14</span>
                     </div>
                     <p class="menu-item-desc">Tender bell pepper halves stuffed with finely shaved ribeye, caramelized onions, mushrooms, and melted provolone cheese.</p>
-                    <span class="evolution-link">Evolved from: Philly Cheesesteak</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-header">
@@ -659,7 +631,6 @@
                         <span class="menu-item-price">$19</span>
                     </div>
                     <p class="menu-item-desc">Crispy herb-crusted eggplant, slow-simmered marinara, fresh mozzarella, and sweet basil served over your choice of rigatoni or creamy polenta.</p>
-                    <span class="evolution-link">Evolved from: Eggplant Parm Sandwich</span>
                 </div>
             </div>
 
@@ -707,7 +678,7 @@
         </section>
     </main>
 
-    <!-- PAGE 3: THE SPACE & HOURS (COMBINED) -->
+    <!-- PAGE 3: VENUE & HOURS (COMBINED) -->
     <main id="page-space" class="page-content animate-fade-in">
         <div class="combined-container">
             
@@ -715,24 +686,24 @@
             <section class="space-layout-block">
                 <div class="space-text">
                     <h2>The Historic Venue</h2>
-                    <p>Located on the bustling corner of 15th and Eye St NW, 15th Street Tavern commands a stunning presence in the freshly renovated, historic Bowen Building. This landmark corner restaurant balances historic grandeur with open-concept modern styling.</p>
+                    <p>Located on the bustling corner of 15th and Eye St NW[cite: 1], 15th Street Tavern commands a stunning presence in the freshly renovated, historic Bowen Building[cite: 1]. This landmark corner restaurant balances historic grandeur with open-concept modern styling[cite: 1].</p>
                     
                     <div class="spec-grid">
                         <div class="spec-item">
                             <h4>Total Footprint</h4>
-                            <p>± 3,842 Sq. Ft.</p>
+                            <p>± 3,842 Sq. Ft.[cite: 1]</p>
                         </div>
                         <div class="spec-item">
                             <h4>Ceiling Height</h4>
-                            <p>Elevated 20' Ceilings</p>
+                            <p>Elevated 20' Ceilings[cite: 1]</p>
                         </div>
                         <div class="spec-item">
                             <h4>Premium Feature</h4>
-                            <p>Direct Outdoor Patio</p>
+                            <p>Direct Outdoor Patio[cite: 1]</p>
                         </div>
                         <div class="spec-item">
                             <h4>Neighborhood Node</h4>
-                            <p>McPherson Square</p>
+                            <p>McPherson Square[cite: 1]</p>
                         </div>
                     </div>
                 </div>
@@ -745,8 +716,8 @@
             <section class="info-grid-block">
                 <div class="info-grid">
                     <div class="info-box">
-                        <h3>The Location</h3>
-                        <p>The Bowen Building<br>875 15th St NW<br>Washington, DC 20005<br><small style="color: var(--gold);">(At McPherson Square Metro)</small></p>
+                        <h3>Venue Location</h3>
+                        <p>The Bowen Building[cite: 1]<br>875 15th St NW[cite: 1]<br>Washington, DC 20005<br><small style="color: var(--gold);">(At McPherson Square Metro)</small>[cite: 1]</p>
                     </div>
                     <div class="info-box">
                         <h3>Dining Hours</h3>
