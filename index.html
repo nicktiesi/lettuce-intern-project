@@ -22,14 +22,18 @@
             --white: #ffffff;
         }
 
-        body {
+        html, body {
+            height: 100%;
             background-color: var(--cream);
             color: var(--dark-charcoal);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+        }
+
+        body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* -----------------------------------------
@@ -50,19 +54,21 @@
             animation: fadeInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        /* Navigation Bar */
+        /* Fixed Navigation Bar */
         header {
             background-color: var(--forest-green);
-            padding: 20px 40px;
+            padding: 0 40px;
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid var(--gold);
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            height: 70px; 
         }
 
         .logo {
@@ -100,20 +106,26 @@
             color: var(--gold);
         }
 
-        /* Page Routing Engine Layout */
+        /* Page Containment System - Dynamic Content Isolation */
         .page-content {
-            display: none; /* Hidden by default, activated via JS */
-            margin-top: 70px; /* Offset for fixed header */
+            display: none; 
+            width: 100%;
             flex: 1;
         }
 
         .page-content.active-page {
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Hero Banner (Home Page) */
+        /* HOME SPECIFIC FRAMEWORK: Zero-gap structural lock */
+        #page-home {
+            height: 100vh;
+        }
+
         .hero {
-            height: calc(100vh - 70px);
+            width: 100%;
+            height: 100%;
             background: linear-gradient(rgba(17, 42, 33, 0.6), rgba(17, 42, 33, 0.75)), 
                         url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
             display: flex;
@@ -122,7 +134,7 @@
             align-items: center;
             text-align: center;
             color: var(--cream);
-            padding: 0 20px;
+            padding: 70px 20px 0 20px; 
         }
 
         .hero h1 {
@@ -156,6 +168,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             cursor: pointer;
+            border: none;
         }
 
         .btn:hover {
@@ -163,11 +176,17 @@
             color: var(--forest-green);
         }
 
-        /* Menu View Layout */
+        /* CONTENT SUBPAGES FRAMEWORK: Clean 70px padding clearing for standard layout view */
+        #page-menu, #page-space {
+            padding-top: 70px;
+        }
+
+        /* Menu View Layout Container */
         .menu-container {
             max-width: 1100px;
-            margin: 50px auto 80px;
-            padding: 0 20px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px 60px 20px; /* Safe, isolated boundary window */
         }
 
         .section-title {
@@ -186,7 +205,7 @@
             margin-bottom: 40px;
         }
 
-        /* Cleaned Centered Menu Tabs Navigation */
+        /* Centered Menu Tabs Navigation */
         .menu-tabs {
             width: 100%;
             border-bottom: 1px solid #ddd;
@@ -292,11 +311,17 @@
             letter-spacing: 1px;
         }
 
-        /* Combined Space, Hours & Location Page Styles */
+        /* -----------------------------------------
+           VENUE & HOURS PERFECT RESTRUCTURING FIX
+        ----------------------------------------- */
         .combined-container {
             max-width: 1100px;
+            width: 100%;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px; /* Isolated bounding padding */
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* Equalized column space gaps */
         }
 
         .space-layout-block {
@@ -307,7 +332,6 @@
             padding: 40px;
             border-radius: 4px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 60px;
             border: 1px solid #eae7e1;
         }
 
@@ -367,11 +391,11 @@
             font-variant-numeric: lining-nums;
         }
 
-        /* Integrated Info Grid */
+        /* Integrated Info Grid - Scrubbed problematic old background blocks */
         .info-grid-block {
             background-color: var(--forest-green);
             color: var(--cream);
-            padding: 50px 40px;
+            padding: 40px;
             border-radius: 4px;
             border-top: 3px solid var(--gold);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -410,6 +434,7 @@
             letter-spacing: 1px;
             border-top: 1px solid #1a2f29;
             margin-top: auto;
+            width: 100%;
         }
 
         /* -----------------------------------------
@@ -427,6 +452,7 @@
                 flex-direction: column;
                 padding: 15px 20px;
                 text-align: center;
+                height: auto; 
             }
             
             nav {
@@ -442,12 +468,16 @@
                 font-size: 11px;
             }
 
-            .page-content {
-                margin-top: 105px;
+            #page-menu, #page-space {
+                padding-top: 105px; /* Safely resets dynamic header padding bounds for mobile navigation view */
+            }
+
+            #page-home {
+                height: 100vh;
             }
 
             .hero {
-                height: calc(100vh - 105px);
+                padding-top: 105px;
             }
 
             .hero h1 {
@@ -460,14 +490,14 @@
             }
 
             .combined-container {
-                padding: 30px 15px;
+                padding: 20px; 
+                gap: 20px;
             }
 
             .space-layout-block {
                 flex-direction: column;
                 gap: 30px;
-                padding: 25px 20px;
-                margin-bottom: 40px;
+                padding: 20px; 
             }
 
             .space-text h2 {
@@ -686,7 +716,7 @@
             <section class="space-layout-block">
                 <div class="space-text">
                     <h2>The Historic Venue</h2>
-                    <p>Located on the bustling corner of 15th and Eye St NW[cite: 1], 15th Street Tavern commands a stunning presence in the freshly renovated, historic Bowen Building[cite: 1]. This landmark corner restaurant balances historic grandeur with open-concept modern styling[cite: 1].</p>
+                    <p>Located on the bustling corner of 15th and Eye St NW, 15th Street Tavern commands a stunning presence in the freshly renovated, historic Bowen Building[cite: 1]. This landmark corner restaurant balances historic grandeur with open-concept modern styling[cite: 1].</p>
                     
                     <div class="spec-grid">
                         <div class="spec-item">
@@ -717,7 +747,7 @@
                 <div class="info-grid">
                     <div class="info-box">
                         <h3>Venue Location</h3>
-                        <p>The Bowen Building[cite: 1]<br>875 15th St NW[cite: 1]<br>Washington, DC 20005<br><small style="color: var(--gold);">(At McPherson Square Metro)</small>[cite: 1]</p>
+                        <p>The Bowen Building[cite: 1]<br>875 15th St NW[cite: 1]<br>Washington, DC 20005<br><small style="color: var(--gold);">(At McPherson Square Metro)</small></p>
                     </div>
                     <div class="info-box">
                         <h3>Dining Hours</h3>
@@ -735,7 +765,7 @@
 
     <!-- Footer -->
     <footer>
-        &copy; 2026 15th Street Tavern. Created for Academic & Internship Presentation Purposes. All leasing data cited from Dochter & Alexander commercial listings.
+        &copy; 2026 15th Street Tavern. Created for Academic & Internship Presentation Purposes. All leasing data cited from Dochter & Alexander commercial listings[cite: 1].
     </footer>
 
     <!-- Single Page Router & Tab Toggling Engine -->
