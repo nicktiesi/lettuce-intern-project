@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="House 71 — an American tavern in Washington, DC. Regional American classics, a bustling bar, private dining and events at the historic Bowen Building.">
+<meta name="theme-color" content="#620A13">
+<title>House 71 | American Tavern — Washington, DC</title>
+
+<meta property="og:title" content="House 71 | American Tavern">
+<meta property="og:description" content="Where American classics meet modern craft. Washington, DC.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Marcellus&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================
+   HOUSE 71 — BRAND STANDARDS
+   Colors  : Dark Red #620A13 · Dark Grey Brown #3E2D24
+             Light Orange #EDEAE2 · Pastel Grey Orange #C7B8A4
+             Warm Grey #6E6A64
+   Type    : Marcellus (headers) · Cinzel (secondary headers)
+             Libre Baskerville (body)
+   ===================================================== */
+:root {
+  --red:        #620A13;
+  --red-deep:   #4a070e;
+  --brown:      #3E2D24;
+  --brown-dk:   #2b1f19;
+  --paper:      #EDEAE2;
+  --paper-warm: #e4dfd4;
+  --stone:      #C7B8A4;
+  --grey:       #6E6A64;
+  /* Warm grey shaded one step for small body copy so it clears WCAG AA
+     on both paper tones while reading as the same brand neutral. */
+  --grey-text:  #5F5B55;
+  --white:      #ffffff;
+
+  /* The logo is the actual Bolsta artwork from the brand standards sheet,
+     extracted to transparent PNGs in /images — not a font substitute. */
+  --head: 'Marcellus', Georgia, serif;
+  --sub:  'Cinzel', Georgia, serif;
+  --body: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+
+  --wrap: 1140px;
+  --header-h: 76px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--brown);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: normal; line-height: 1.25; }
+p { margin: 0; }
+/* height:auto is load-bearing — without it the width/height attributes
+   on the logo art fight the CSS width and squash the image. */
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- A11y ---------- */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--red); color: var(--paper);
+  padding: 12px 20px; z-index: 2000;
+  font-family: var(--sub); font-size: 13px; letter-spacing: 1px;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.rise { animation: riseIn .5s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* =====================================================
+   BRAND MOTIFS — diamond divider & double-rule frame
+   ===================================================== */
+.diamond {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; margin: 0 auto 18px; max-width: 260px;
+}
+.diamond::before, .diamond::after {
+  content: ""; flex: 1; height: 1px; background: var(--red);
+}
+.diamond span {
+  width: 7px; height: 7px; background: var(--red);
+  transform: rotate(45deg); display: block;
+}
+.diamond span + span { margin-left: -2px; }
+
+.frame {
+  border: 1px solid var(--red);
+  padding: 6px;
+}
+.frame > .frame-inner {
+  border: 1px solid var(--red);
+  padding: 30px 28px;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+.site-header {
+  position: fixed; inset: 0 0 auto 0; height: var(--header-h);
+  background: var(--paper);
+  border-bottom: 1px solid var(--red);
+  z-index: 1000; display: flex; align-items: center;
+}
+.header-inner {
+  width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 26px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+
+.brand {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  display: flex; align-items: center; line-height: 1;
+}
+.brand img { height: 30px; width: auto; }
+
+.nav-toggle {
+  display: none; align-items: center; gap: 9px;
+  background: none; border: 1px solid var(--red);
+  color: var(--red); font-family: var(--sub);
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 9px 14px; cursor: pointer;
+}
+.nav-toggle .bars { position: relative; display: inline-block; width: 15px; height: 1px; background: var(--red); }
+.nav-toggle .bars::before, .nav-toggle .bars::after {
+  content: ""; position: absolute; left: 0; width: 15px; height: 1px; background: var(--red);
+}
+.nav-toggle .bars::before { top: -5px; } .nav-toggle .bars::after { top: 5px; }
+
+.site-nav { display: flex; align-items: center; gap: 2px; }
+.nav-link {
+  background: none; border: 0; cursor: pointer;
+  color: var(--brown); font-family: var(--sub);
+  font-size: 11.5px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 10px 15px; border-bottom: 1px solid transparent;
+  transition: color .25s, border-color .25s;
+}
+.nav-link:hover { color: var(--red); }
+.nav-link[aria-current="page"] { color: var(--red); border-bottom-color: var(--red); }
+
+/* =====================================================
+   ROUTER
+   ===================================================== */
+.page { display: none; }
+.page.is-active { display: block; }
+main { flex: 1 0 auto; padding-top: var(--header-h); }
+#page-home { padding-top: 0; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 26px; }
+.wrap--narrow { max-width: 880px; }
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero {
+  min-height: 74vh;
+  margin-top: calc(var(--header-h) * -1);
+  padding: calc(var(--header-h) + 54px) 26px 64px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--red);
+}
+.hero-frame {
+  border: 1px solid rgba(237,234,226,.7);
+  border-radius: 250px / 190px;
+  padding: 8px; max-width: 920px; width: 100%;
+}
+.hero-frame-inner {
+  border: 1px solid rgba(237,234,226,.7);
+  border-radius: 243px / 184px;
+  padding: 96px 60px; text-align: center; color: var(--paper);
+}
+.hero h1 { margin: 0 0 24px; }
+/* Source artwork is 857px wide natively, so the display width stays
+   under that to keep the fine strokes legible rather than mushy. */
+.hero h1 img { width: 100%; max-width: 620px; margin: 0 auto; }
+.hero .lede {
+  font-style: italic; font-size: 15px;
+  max-width: 480px; margin: 0 auto 28px;
+  color: rgba(237,234,226,.92);
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+
+.btn {
+  display: inline-block; cursor: pointer;
+  font-family: var(--sub); font-size: 11.5px;
+  letter-spacing: 2.4px; text-transform: uppercase;
+  padding: 14px 30px;
+  background: var(--paper); color: var(--red);
+  border: 1px solid var(--paper);
+  transition: background .25s, color .25s;
+}
+.btn:hover { background: transparent; color: var(--paper); }
+.btn-outline { background: transparent; color: var(--paper); }
+.btn-outline:hover { background: var(--paper); color: var(--red); }
+
+/* =====================================================
+   SECTIONS
+   ===================================================== */
+.section { padding: 80px 0; }
+.section--tight { padding: 56px 0; }
+.section--paper2 { background: var(--paper-warm); }
+
+.section-head { text-align: center; margin-bottom: 46px; }
+.section-head h2 {
+  font-family: var(--head); color: var(--red);
+  font-size: clamp(28px, 5vw, 42px);
+  letter-spacing: clamp(2px, .6vw, 5px);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.section-head .kicker {
+  font-family: var(--sub); font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+}
+.section-head p { font-style: italic; color: var(--grey-text); max-width: 620px; margin: 0 auto; }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.split-media img {
+  width: 100%; height: 420px; object-fit: cover;
+  border: 1px solid var(--stone);
+}
+.split-text h2 {
+  font-family: var(--head); color: var(--red);
+  font-size: clamp(24px, 3.6vw, 32px);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px;
+}
+.split-text p + p { margin-top: 15px; }
+.split-text p { color: var(--brown); }
+
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 26px; }
+.pillar { background: var(--white); border: 1px solid var(--stone); padding: 32px 28px; }
+.pillar h3 {
+  font-family: var(--sub); font-size: 14px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+}
+.pillar p { color: var(--grey-text); font-size: 15px; }
+
+.band { background: var(--red); color: var(--paper); padding: 70px 0; }
+.band .section-head h2, .band .section-head .kicker { color: var(--paper); }
+.band .diamond::before, .band .diamond::after { background: var(--paper); }
+.band .diamond span { background: var(--paper); }
+
+
+/* =====================================================
+   MENU
+   ===================================================== */
+.tablist-scroll { border-bottom: 1px solid var(--stone); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tablist { display: flex; justify-content: center; min-width: max-content; margin: 0 auto; }
+.tab {
+  background: none; border: 0; border-bottom: 2px solid transparent; cursor: pointer;
+  color: var(--grey-text); font-family: var(--sub);
+  font-size: 11.5px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 15px 22px; white-space: nowrap; transition: color .2s, border-color .2s;
+}
+.tab:hover { color: var(--red); }
+.tab[aria-selected="true"] { color: var(--red); border-bottom-color: var(--red); }
+
+.tabpanel { padding-top: 40px; }
+.tabpanel[hidden] { display: none; }
+
+.menu-meta {
+  text-align: center; font-family: var(--sub);
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--red); margin-bottom: 34px;
+}
+
+.menu-cols { display: grid; grid-template-columns: 1.55fr 1fr; gap: 46px; align-items: start; }
+
+.menu-group { margin-bottom: 42px; }
+.menu-group > h3 {
+  font-family: var(--head); color: var(--red);
+  font-size: 26px; letter-spacing: 2.5px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--stone); margin-bottom: 8px;
+}
+.group-note { font-style: italic; font-size: 13.5px; color: var(--grey-text); margin-bottom: 22px; }
+
+.dish { padding: 11px 0; break-inside: avoid; }
+.dish + .dish { border-top: 1px solid rgba(199,184,164,.35); }
+.dish-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.dish-name { font-weight: 700; font-size: 15.5px; color: var(--brown-dk); }
+.dish-price { font-weight: 700; font-size: 15.5px; color: var(--brown-dk); white-space: nowrap; }
+.dish-desc { font-size: 13.5px; color: var(--grey-text); line-height: 1.6; margin-top: 3px; }
+.dish-origin {
+  display: block; font-family: var(--sub); font-size: 10.5px;
+  letter-spacing: 1.6px; text-transform: uppercase; color: var(--red); margin-bottom: 2px;
+}
+.tag {
+  display: inline-block; font-family: var(--sub); font-size: 9px;
+  letter-spacing: 1px; text-transform: uppercase;
+  border: 1px solid var(--stone); color: var(--red);
+  padding: 1px 6px; margin-left: 7px; vertical-align: middle;
+}
+.tag--sig { background: var(--red); color: var(--paper); border-color: var(--red); }
+
+/* Boxed sidebar — mirrors the printed menu's framed panel.
+   Deliberately NOT sticky: three stacked panels fighting for the same
+   sticky offset caused the menu's jumpy scrolling. */
+.side-box { border: 1px solid var(--red); padding: 5px; }
+.side-box-inner { border: 1px solid var(--red); padding: 26px 22px; }
+.side-box h3 {
+  font-family: var(--sub); text-align: center; color: var(--red);
+  font-size: 17px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px;
+}
+.side-box .diamond { max-width: 150px; margin-bottom: 16px; }
+.side-box .note { text-align: center; font-style: italic; font-size: 12.5px; color: var(--grey-text); margin-bottom: 16px; }
+.side-box .dish { padding: 8px 0; }
+.side-box .dish-name, .side-box .dish-price { font-size: 13.5px; }
+.side-box .dish-desc { font-size: 12px; }
+.side-box + .side-box { margin-top: 26px; }
+
+/* Regional cocktail rail */
+.region { display: grid; grid-template-columns: 34px 1fr; gap: 16px; padding: 18px 0; }
+.region + .region { border-top: 1px solid rgba(199,184,164,.5); }
+.region-label {
+  font-family: var(--sub); font-size: 10.5px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--red);
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  justify-self: center; align-self: center; text-align: center;
+}
+
+.hh-banner {
+  border: 1px solid var(--red); padding: 5px; margin-bottom: 40px;
+}
+.hh-banner-inner { border: 1px solid var(--red); padding: 24px; text-align: center; }
+.hh-banner h3 {
+  font-family: var(--head); color: var(--red);
+  font-size: 27px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px;
+}
+.hh-banner p { font-family: var(--sub); font-size: 11.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brown); }
+
+.price-lead {
+  font-family: var(--sub); color: var(--red);
+  font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* =====================================================
+   EVENTS
+   ===================================================== */
+.event-hero { margin: 0 0 40px; }
+.event-hero img {
+  width: 100%; height: 420px; object-fit: cover; border: 1px solid var(--stone);
+}
+.event-hero figcaption {
+  font-family: var(--sub); font-size: 11px; letter-spacing: 2.4px;
+  text-transform: uppercase; color: var(--red); text-align: center; margin-top: 12px;
+}
+
+.event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.event-card { background: var(--white); border: 1px solid var(--stone); padding: 34px 30px; }
+.event-card h3 {
+  font-family: var(--sub); color: var(--red);
+  font-size: 15px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 6px;
+}
+.event-card .rate { font-family: var(--head); font-size: 27px; color: var(--brown-dk); margin-bottom: 16px; }
+.spec-line { display: flex; justify-content: space-between; gap: 14px; padding: 7px 0; font-size: 14px; }
+.spec-line + .spec-line { border-top: 1px solid rgba(199,184,164,.45); }
+.spec-line dt { color: var(--grey-text); margin: 0; }
+.spec-line dd { margin: 0; font-weight: 700; color: var(--brown-dk); }
+
+.mini-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+.mini-table caption {
+  font-family: var(--sub); font-size: 10.5px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--red); text-align: left; padding-bottom: 8px;
+}
+.mini-table th, .mini-table td { text-align: right; padding: 6px 0; border-bottom: 1px solid rgba(199,184,164,.45); }
+.mini-table th:first-child, .mini-table td:first-child { text-align: left; }
+.mini-table th {
+  font-family: var(--sub); font-weight: 400; font-size: 10.5px;
+  letter-spacing: 1.4px; text-transform: uppercase; color: var(--grey-text);
+}
+
+.feature-list { list-style: none; padding: 0; margin: 0; }
+.feature-list li { position: relative; padding-left: 20px; margin-bottom: 9px; font-size: 14.5px; color: var(--brown); }
+.feature-list li::before {
+  content: ""; position: absolute; left: 2px; top: 9px;
+  width: 5px; height: 5px; background: var(--red); transform: rotate(45deg);
+}
+
+.contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 26px; }
+.contact-card h3 { font-family: var(--sub); font-size: 15px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--red); }
+.contact-card .role {
+  font-family: var(--sub); font-size: 10.5px; letter-spacing: 1.6px;
+  text-transform: uppercase; color: var(--grey-text); margin-bottom: 10px;
+}
+.contact-card a { color: var(--brown-dk); }
+
+/* =====================================================
+   VISIT
+   ===================================================== */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; text-align: center; }
+.info h3 { font-family: var(--sub); font-size: 12.5px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+.info p { font-size: 14.5px; line-height: 1.9; color: rgba(237,234,226,.9); }
+.info .soft { color: rgba(237,234,226,.6); font-style: italic; }
+
+.spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; margin-top: 28px; }
+.spec h4 { font-family: var(--sub); font-size: 10.5px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
+.spec p { font-weight: 700; font-size: 15px; color: var(--brown-dk); }
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+.site-footer {
+  background: var(--brown); color: rgba(237,234,226,.66);
+  padding: 46px 26px; text-align: center;
+  font-size: 12px; margin-top: auto;
+}
+.site-footer .mark { display: block; margin: 0 auto 14px; height: 46px; width: auto; }
+.site-footer .tag-line {
+  font-family: var(--sub); font-size: 10px; letter-spacing: 3.5px;
+  text-transform: uppercase; color: var(--stone); margin-bottom: 22px;
+}
+.site-footer p + p { margin-top: 7px; }
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 960px) {
+  .menu-cols { grid-template-columns: 1fr; gap: 34px; }
+  .split { grid-template-columns: 1fr; gap: 34px; }
+  .split-media img { height: 300px; }
+  .event-hero img { height: 320px; }
+}
+
+@media (max-width: 760px) {
+  .nav-toggle { display: inline-flex; }
+  .site-nav {
+    display: none; position: absolute; top: var(--header-h); left: 0; right: 0;
+    flex-direction: column; background: var(--paper);
+    border-bottom: 1px solid var(--red); padding: 4px 0 10px;
+  }
+  .site-nav.is-open { display: flex; }
+  .nav-link { width: 100%; text-align: center; padding: 14px 20px; border-bottom: 1px solid rgba(199,184,164,.4); }
+
+  /* The wide oval collapses to a softer capsule on narrow screens —
+     a 250px radius on a ~330px box reads as a lopsided blob otherwise. */
+  .hero { min-height: 0; }
+  .hero-frame { border-radius: 90px / 70px; }
+  .hero-frame-inner { border-radius: 86px / 67px; padding: 52px 24px; }
+  .section { padding: 56px 0; }
+  .wrap { padding: 0 18px; }
+  .tablist { justify-content: flex-start; }
+  .frame > .frame-inner { padding: 24px 18px; }
+  .region { grid-template-columns: 1fr; gap: 6px; }
+  .region-label { writing-mode: horizontal-tb; transform: none; text-align: left; justify-self: start; }
+}
+
+@media (max-width: 420px) {
+  .brand img { height: 22px; }
+  .tab { padding: 13px 14px; font-size: 10.5px; }
+  .menu-group > h3 { font-size: 21px; }
+  .dish-top { flex-wrap: wrap; }
+  .hero-frame-inner { padding: 42px 18px; }
+  .site-footer .mark { height: 34px; }
+  .event-hero img, .split-media img { height: 240px; }
+  /* Long wine names + a price on one line need room to break cleanly */
+  .dish-name { font-size: 15px; }
+  .mini-table { font-size: 13px; }
+}
+
+/* =====================================================
+   PRINT
+   ===================================================== */
+@media print {
+  .site-header, .tablist-scroll, .hero, .site-footer, .btn, .nav-toggle { display: none !important; }
+  main { padding-top: 0; }
+  .page { display: block !important; }
+  .tabpanel[hidden] { display: block !important; }
+  body { background: #fff; font-size: 10.5pt; }
+  .band { background: #fff; color: #000; }
+  .band .section-head h2, .info p { color: #000; }
+  .menu-cols { grid-template-columns: 1.5fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <button class="brand" type="button" data-route="home" aria-label="House 71 — home">
+      <img src="images/logo-wordmark.png" alt="House 71" width="1714" height="288">
+    </button>
+
+    <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="siteNav">
+      <span class="bars" aria-hidden="true"></span> Menu
+    </button>
+
+    <nav class="site-nav" id="siteNav" aria-label="Main">
+      <button class="nav-link" type="button" data-route="home" aria-current="page">About</button>
+      <button class="nav-link" type="button" data-route="menu">Menus</button>
+      <button class="nav-link" type="button" data-route="events">Private Events</button>
+      <button class="nav-link" type="button" data-route="visit">Visit</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HOME ================= -->
+  <div class="page is-active" id="page-home" role="region" aria-label="About House 71">
+
+    <section class="hero">
+      <div class="hero-frame">
+        <div class="hero-frame-inner">
+          <h1><img src="images/logo-lockup-light.png" alt="House 71 — American Tavern" width="1714" height="538"></h1>
+          <p class="lede">Where American classics meet modern craft.</p>
+          <div class="hero-actions">
+            <button class="btn" type="button" data-route="menu">View Menus</button>
+            <button class="btn btn-outline" type="button" data-route="events">Private Events</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="split">
+          <div class="split-media">
+            <img src="images/garden-room.jpg"
+                 alt="Warm dining room with woven pendant lighting and greenery"
+                 loading="lazy" decoding="async" width="652" height="568">
+          </div>
+          <div class="split-text">
+            <h2>Our Story</h2>
+            <p>House 71 is a contemporary American tavern inspired by the country's diverse culinary traditions, blending timeless hospitality with a vibrant social atmosphere. The space feels sophisticated but welcoming, with a bustling bar, warm design elements, and a menu that offers select American classics from each region of the country and their cultures.</p>
+            <p>Our kitchen brings that regional spirit to life through a menu of craveable, elevated plates and sandwiches — built with the same attention to detail, whether it's a lively lunch, a long dinner, or a casual reception.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ================= MENUS ================= -->
+  <div class="page" id="page-menu" role="region" aria-label="Menus">
+    <section class="section section--tight">
+      <div class="wrap">
+
+        <div class="section-head">
+          <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+          <h2>Menus</h2>
+          <p>Select American classics from each region of the country.</p>
+        </div>
+
+        <div class="tablist-scroll">
+          <div class="tablist" role="tablist" aria-label="Menu sections">
+            <button class="tab" role="tab" id="tab-lunch"  aria-controls="panel-lunch"  aria-selected="true"  tabindex="0">Lunch</button>
+            <button class="tab" role="tab" id="tab-dinner" aria-controls="panel-dinner" aria-selected="false" tabindex="-1">Dinner</button>
+            <button class="tab" role="tab" id="tab-bar"    aria-controls="panel-bar"    aria-selected="false" tabindex="-1">Cocktails</button>
+            <button class="tab" role="tab" id="tab-wine"   aria-controls="panel-wine"   aria-selected="false" tabindex="-1">Wine &amp; Beer</button>
+            <button class="tab" role="tab" id="tab-happy"  aria-controls="panel-happy"  aria-selected="false" tabindex="-1">Happy Hour</button>
+          </div>
+        </div>
+
+        <!-- ---------- LUNCH ---------- -->
+        <div class="tabpanel" role="tabpanel" id="panel-lunch" aria-labelledby="tab-lunch" tabindex="0">
+          <p class="menu-meta">Lunch</p>
+
+          <div class="menu-cols">
+            <div>
+              <div class="menu-group">
+                <h3>Small Plates + Greens</h3>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Cheesesteak Stuffed Peppers</span><span class="dish-price">15</span></div>
+                  <p class="dish-desc">Roasted sweet peppers filled with shaved steak, caramelized onions, and melted provolone</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Maryland Crab Cakes <span class="tag tag--sig">Signature</span></span><span class="dish-price">19</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Chesapeake Bay</span>Two jumbo lump crab cakes served with sweet corn succotash, lemon aioli, and arugula</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pretzel Bites with Beer Cheese</span><span class="dish-price">12</span></div>
+                  <p class="dish-desc">Warm, soft-baked pretzel bites with housemade beer cheese and whole grain mustard</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Fried Pickles</span><span class="dish-price">10</span></div>
+                  <p class="dish-desc">Crispy dill pickle chips served with housemade buttermilk ranch</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pimento Cheese Dip</span><span class="dish-price">11</span></div>
+                  <p class="dish-desc"><span class="dish-origin">The South</span>Southern-style pimento cheese with toasted baguette and fresh vegetables</p>
+                </div>
+              </div>
+
+              <div class="menu-group">
+                <h3>Main Dishes</h3>
+                <p class="group-note">Served with your choice of Hand-Cut Fries, Coleslaw, Charred Corn Succotash, Tavern House Salad, White Cheddar Mac &amp; Cheese +$3, Parmesan Polenta +$3, or Tomato Basil Soup +$3</p>
+
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Smoked Brisket Sandwich <span class="tag tag--sig">Signature</span></span><span class="dish-price">18</span></div>
+                  <p class="dish-desc">6 oz. slow-smoked brisket finished with house BBQ sauce, crispy onions, and house pickles on a toasted brioche bun</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Philly Cheesesteak</span><span class="dish-price">18</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Philadelphia</span>Shaved ribeye with sautéed peppers, caramelized onions, melted provolone, and roasted garlic aioli on a toasted hoagie roll</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Chicago Italian Beef</span><span class="dish-price">17</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Chicago</span>Thin-sliced roast beef dipped in au jus, topped with sweet peppers and house giardiniera on a toasted Italian roll</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Fried Chicken Sandwich <span class="tag tag--sig">Signature</span></span><span class="dish-price">19</span></div>
+                  <p class="dish-desc">Buttermilk fried chicken breast topped with hot honey, creamy slaw, and house pickles on a toasted brioche bun</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Cajun Shrimp &amp; Grits</span><span class="dish-price">25</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Gulf Coast</span>Blackened Gulf shrimp served over creamy cheddar grits with Cajun butter sauce and scallions</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Maryland Blue Crab Roll <span class="tag tag--sig">Signature</span></span><span class="dish-price">26</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Chesapeake Bay</span>Fresh jumbo lump crab lightly dressed with lemon herb mayo and served on a butter-toasted split-top roll</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Grilled Ribeye Steak Sandwich <span class="tag tag--sig">Signature</span></span><span class="dish-price">19</span></div>
+                  <p class="dish-desc">8 oz. grilled ribeye, sliced and served with roasted garlic aioli, baby arugula, crispy onions, and toasted artisan bread</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Grilled Cheese &amp; Tomato Soup <span class="tag tag--sig">Signature</span></span><span class="dish-price">13</span></div>
+                  <p class="dish-desc">White cheddar and American cheese melted on toasted sourdough, served with roasted tomato basil soup</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pulled Mushroom BBQ Sandwich</span><span class="dish-price">15</span></div>
+                  <p class="dish-desc">Slow-roasted oyster and cremini mushrooms tossed in house BBQ sauce with creamy slaw and crispy onions on a toasted brioche bun</p>
+                </div>
+              </div>
+            </div>
+
+            <aside>
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>House Sides</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">White Cheddar Mac &amp; Cheese</span><span class="dish-price">8</span></div>
+                    <p class="dish-desc">Creamy white cheddar sauce finished with toasted herb breadcrumbs</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Hand-Cut Fries</span><span class="dish-price">6</span></div>
+                    <p class="dish-desc">Sea salt, cracked pepper, and fresh herbs</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Coleslaw</span><span class="dish-price">6</span></div>
+                    <p class="dish-desc">Creamy cabbage slaw with apple cider vinaigrette</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Parmesan Grits</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Creamy parmesan polenta finished with butter and cracked pepper</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Charred Corn Succotash</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Sweet corn, peppers, onions, herbs, and butter</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Tavern House Salad</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Mixed greens, cucumber, tomato, pickled onions, cheddar, and herb vinaigrette</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Caesar Salad</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Romaine lettuce, shaved parmesan, garlic breadcrumbs, and Caesar dressing</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Roasted Garlic Mashed Potatoes</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Whipped Yukon Gold potatoes with roasted garlic and butter</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>Desserts</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Warm Apple Crisp</span><span class="dish-price">11</span></div>
+                    <p class="dish-desc">Cinnamon apples, oat crumble, and vanilla ice cream</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Gooey Butter Cake</span><span class="dish-price">10</span></div>
+                    <p class="dish-desc"><span class="dish-origin">St. Louis</span>A St. Louis classic served warm with whipped cream</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Chocolate Bourbon Bread Pudding</span><span class="dish-price">11</span></div>
+                    <p class="dish-desc">Brioche bread pudding with bourbon caramel sauce</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">New York Cheesecake</span><span class="dish-price">11</span></div>
+                    <p class="dish-desc"><span class="dish-origin">New York</span>Classic cheesecake with seasonal berry compote</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>Little Tavern</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <p class="note">For guests 12 and under<br>Served with fries, applesauce, or fresh fruit<br><strong>$10 each</strong></p>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Grilled Cheese</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Crispy Chicken Tenders</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Cheeseburger</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Buttered Rigatoni</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Mac &amp; Cheese</span></div></div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- ---------- DINNER ---------- -->
+        <div class="tabpanel" role="tabpanel" id="panel-dinner" aria-labelledby="tab-dinner" tabindex="0" hidden>
+          <p class="menu-meta">Dinner</p>
+
+          <div class="menu-cols">
+            <div>
+              <div class="menu-group">
+                <h3>Small Plates + Greens</h3>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Cheesesteak Stuffed Peppers</span><span class="dish-price">15</span></div>
+                  <p class="dish-desc">Roasted sweet peppers filled with shaved steak, caramelized onions, and melted provolone</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Maryland Crab Cakes <span class="tag tag--sig">Signature</span></span><span class="dish-price">19</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Chesapeake Bay</span>Two jumbo lump crab cakes served with sweet corn succotash, lemon aioli, and arugula</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pretzel Bites with Beer Cheese</span><span class="dish-price">12</span></div>
+                  <p class="dish-desc">Warm, soft-baked pretzel bites with housemade beer cheese and whole grain mustard</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Fried Pickles</span><span class="dish-price">10</span></div>
+                  <p class="dish-desc">Crispy dill pickle chips served with housemade buttermilk ranch</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pimento Cheese Dip</span><span class="dish-price">11</span></div>
+                  <p class="dish-desc"><span class="dish-origin">The South</span>Southern-style pimento cheese with toasted baguette and fresh vegetables</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Chicken Caesar Salad</span><span class="dish-price">15</span></div>
+                  <p class="dish-desc">Grilled chicken, romaine lettuce, shaved parmesan, garlic breadcrumbs, and Caesar dressing</p>
+                </div>
+              </div>
+
+              <div class="menu-group">
+                <h3>Main Dishes</h3>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Smokehouse Brisket Plate <span class="tag tag--sig">Signature</span></span><span class="dish-price">27</span></div>
+                  <p class="dish-desc">10 oz. slow-smoked brisket glazed with house BBQ sauce and served with white cheddar mac &amp; cheese, charred corn succotash, and fried pickles</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Steak Frites <span class="tag tag--sig">Signature</span></span><span class="dish-price">36</span></div>
+                  <p class="dish-desc">12 oz. grilled ribeye finished with herb butter and served with hand-cut fries and a lightly dressed arugula salad</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Italian Beef Short Rib</span><span class="dish-price">29</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Chicago</span>Braised 10 oz. beef short rib over creamy parmesan grits with roasted sweet peppers, house giardiniera, and rich beef jus</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Maryland Blue Crab Roll <span class="tag tag--sig">Signature</span></span><span class="dish-price">26</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Chesapeake Bay</span>Fresh jumbo lump crab lightly dressed with lemon herb mayo and served on a butter-toasted split-top roll with hand-cut fries and coleslaw</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Cajun Shrimp &amp; Grits</span><span class="dish-price">25</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Gulf Coast</span>Blackened Gulf shrimp served over creamy cheddar grits with Cajun butter sauce and scallions</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Fried Chicken Sandwich <span class="tag tag--sig">Signature</span></span><span class="dish-price">19</span></div>
+                  <p class="dish-desc">Buttermilk fried chicken breast topped with hot honey, creamy slaw, and house pickles on a toasted brioche bun served with hand-cut fries</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Chicken Parmesan</span><span class="dish-price">23</span></div>
+                  <p class="dish-desc">Crispy breaded chicken cutlet topped with marinara, melted mozzarella, and basil, served over rigatoni pasta</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Beer-Battered Cod &amp; Chips</span><span class="dish-price">23</span></div>
+                  <p class="dish-desc"><span class="dish-origin">New England</span>Beer-battered Atlantic cod served with hand-cut fries, creamy coleslaw, tartar sauce, and grilled lemon</p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Eggplant Parmesan</span><span class="dish-price">21</span></div>
+                  <p class="dish-desc">Crispy breaded eggplant layered with marinara, mozzarella, parmesan, and basil, served over rigatoni pasta</p>
+                </div>
+              </div>
+            </div>
+
+            <aside>
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>House Sides</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">White Cheddar Mac &amp; Cheese</span><span class="dish-price">8</span></div>
+                    <p class="dish-desc">Creamy white cheddar sauce finished with toasted herb breadcrumbs</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Hand-Cut Fries</span><span class="dish-price">6</span></div>
+                    <p class="dish-desc">Sea salt, cracked pepper, and fresh herbs</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Coleslaw</span><span class="dish-price">6</span></div>
+                    <p class="dish-desc">Creamy cabbage slaw with apple cider vinaigrette</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Parmesan Grits</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Creamy parmesan polenta finished with butter and cracked pepper</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Charred Corn Succotash</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Sweet corn, peppers, onions, herbs, and butter</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Tavern House Salad</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Mixed greens, cucumber, tomato, pickled onions, cheddar, and herb vinaigrette</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Roasted Garlic Mashed Potatoes</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Whipped Yukon Gold potatoes with roasted garlic and butter</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>Desserts</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Warm Apple Crisp</span><span class="dish-price">11</span></div>
+                    <p class="dish-desc">Cinnamon apples, oat crumble, and vanilla ice cream</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Gooey Butter Cake</span><span class="dish-price">10</span></div>
+                    <p class="dish-desc"><span class="dish-origin">St. Louis</span>A St. Louis classic served warm with whipped cream</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Chocolate Bourbon Bread Pudding</span><span class="dish-price">11</span></div>
+                    <p class="dish-desc">Brioche bread pudding with bourbon caramel sauce</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">New York Cheesecake</span><span class="dish-price">11</span></div>
+                    <p class="dish-desc"><span class="dish-origin">New York</span>Classic cheesecake with seasonal berry compote</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>Little Tavern</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <p class="note">For guests 12 and under<br>Served with fries, applesauce, or fresh fruit<br><strong>$10 each</strong></p>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Grilled Cheese</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Crispy Chicken Tenders</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Cheeseburger</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Buttered Rigatoni</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Mac &amp; Cheese</span></div></div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- ---------- COCKTAILS ---------- -->
+        <div class="tabpanel" role="tabpanel" id="panel-bar" aria-labelledby="tab-bar" tabindex="0" hidden>
+          <p class="menu-meta">A toast to America's regions</p>
+
+          <div class="menu-cols">
+            <div>
+              <div class="menu-group">
+                <h3>Signature Cocktails</h3>
+
+                <div class="region">
+                  <div class="region-label">East Coast</div>
+                  <div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">The District Rickey <span class="tag tag--sig">Signature</span></span><span class="dish-price">15</span></div>
+                      <p class="dish-desc">Green Hat Gin, lime cordial, blackberry puree, soda water</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Shenandoah Rye Manhattan</span><span class="dish-price">17</span></div>
+                      <p class="dish-desc">Catoctin Creek Roundstone Rye, sweet vermouth, sour cherry liqueur, Angostura bitters</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Boston Harbor Espresso Martini</span><span class="dish-price">17</span></div>
+                      <p class="dish-desc">Vodka, espresso, coffee liqueur, maple syrup, orange bitters</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="region">
+                  <div class="region-label">Midwest</div>
+                  <div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Wisconsin Brandy Old Fashioned</span><span class="dish-price">16</span></div>
+                      <p class="dish-desc">Korbel Brandy, muddled orange &amp; cherry, bitters, lemon-lime soda</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Chicago Boulevardier</span><span class="dish-price">17</span></div>
+                      <p class="dish-desc">Bourbon, Campari, sweet vermouth</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">St. Louis Sling</span><span class="dish-price">16</span></div>
+                      <p class="dish-desc">Bourbon, blackberry, lemon, ginger beer</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="region">
+                  <div class="region-label">The South</div>
+                  <div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Charleston Peach Smash</span><span class="dish-price">16</span></div>
+                      <p class="dish-desc">Bourbon, fresh peach, mint, lemon</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Nashville Hot Honey Margarita</span><span class="dish-price">17</span></div>
+                      <p class="dish-desc">Reposado tequila, hot honey, lime, Tajín rim</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Savannah Sweet Tea Mule</span><span class="dish-price">15</span></div>
+                      <p class="dish-desc">Vodka, sweet tea, ginger beer, lemon</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="region">
+                  <div class="region-label">Southwest</div>
+                  <div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Santa Fe Paloma</span><span class="dish-price">16</span></div>
+                      <p class="dish-desc">Blanco tequila, grapefruit, agave, lime</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Texas Smoke</span><span class="dish-price">17</span></div>
+                      <p class="dish-desc">Bourbon, mezcal, smoked maple syrup, orange bitters</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="region">
+                  <div class="region-label">West Coast</div>
+                  <div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Pacific Sunset Highball</span><span class="dish-price">16</span></div>
+                      <p class="dish-desc">Mezcal, Aperol, passionfruit, lime, sparkling mineral water</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Golden Gate Spritz</span><span class="dish-price">14</span></div>
+                      <p class="dish-desc">Prosecco, St-Germain elderflower, Meyer lemon, rosemary</p>
+                    </div>
+                    <div class="dish">
+                      <div class="dish-top"><span class="dish-name">Oregon Blackberry Mule</span><span class="dish-price">15</span></div>
+                      <p class="dish-desc">Vodka, blackberry, ginger beer, lime</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside>
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>Zero Proof</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Cherry Blossom Shrub</span><span class="dish-price">8</span></div>
+                    <p class="dish-desc">House cherry shrub, mint, sparkling water</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Meyer Lemon &amp; Basil Lemonade</span><span class="dish-price">7</span></div>
+                    <p class="dish-desc">Fresh-squeezed Meyer lemon, basil, raw cane sugar</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Blackberry Mint Fizz</span><span class="dish-price">8</span></div>
+                    <p class="dish-desc">Blackberry, lime, mint, club soda</p>
+                  </div>
+                  <div class="dish">
+                    <div class="dish-top"><span class="dish-name">Capitol Cold Brew &amp; Tonic</span><span class="dish-price">8</span></div>
+                    <p class="dish-desc">Cold brew, citrus tonic, orange twist</p>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- ---------- WINE & BEER ---------- -->
+        <div class="tabpanel" role="tabpanel" id="panel-wine" aria-labelledby="tab-wine" tabindex="0" hidden>
+          <p class="menu-meta">Wine listed by the glass / bottle</p>
+
+          <div class="menu-cols">
+            <div>
+              <div class="menu-group">
+                <h3>White</h3>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Chardonnay — Kendall-Jackson "Vintner's Reserve" '24</span><span class="dish-price">11 | 42</span></div>
+                  <p class="dish-desc"><span class="dish-origin">California</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pinot Grigio — King Estate '24</span><span class="dish-price">14 | 54</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Willamette Valley, OR</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Dry Riesling — Dr. Konstantin Frank '24</span><span class="dish-price">14 | 54</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Finger Lakes, NY</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Sauvignon Blanc — Cakebread Cellars '24</span><span class="dish-price">18 | 68</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Napa Valley, CA</span></p>
+                </div>
+              </div>
+
+              <div class="menu-group">
+                <h3>Red</h3>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pinot Noir — A to Z Wineworks '23</span><span class="dish-price">13 | 50</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Oregon</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Pinot Noir — Domaine Serene "Evenstad Reserve" '22</span><span class="dish-price">26 | 102</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Willamette Valley, OR</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Red Blend — Duckhorn "Decoy" '23</span><span class="dish-price">15 | 58</span></div>
+                  <p class="dish-desc"><span class="dish-origin">California</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Cabernet Sauvignon — Stag's Leap Wine Cellars "Artemis" '22</span><span class="dish-price">32 | 125</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Napa Valley, CA</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Châteauneuf-du-Pape Rouge — Château de Beaucastel '22</span><span class="dish-price">36 | 140</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Rhône Valley, France</span></p>
+                </div>
+              </div>
+
+              <div class="menu-group">
+                <h3>Sparkling &amp; Rosé</h3>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Sparkling Rosé — Soter Vineyards '21</span><span class="dish-price">15 | 58</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Willamette Valley, OR</span></p>
+                </div>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Blanc de Blancs — Schramsberg '22</span><span class="dish-price">22 | 88</span></div>
+                  <p class="dish-desc"><span class="dish-origin">North Coast, CA</span></p>
+                </div>
+              </div>
+
+              <div class="menu-group">
+                <h3>Reserve</h3>
+                <div class="dish">
+                  <div class="dish-top"><span class="dish-name">Proprietary Red — Opus One '22</span><span class="dish-price">495</span></div>
+                  <p class="dish-desc"><span class="dish-origin">Napa Valley, CA · Bottle service only</span></p>
+                </div>
+              </div>
+            </div>
+
+            <aside>
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>Draft</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Atlas Solar Power IPA</span><span class="dish-price">8</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">DC Brau Helles Lager</span><span class="dish-price">9</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Right Proper Pale Ale</span><span class="dish-price">9</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Port City Optimal Wit</span><span class="dish-price">9</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Guinness Draught</span><span class="dish-price">9</span></div></div>
+                </div>
+              </div>
+
+              <div class="side-box">
+                <div class="side-box-inner">
+                  <h3>Bottles &amp; Cans</h3>
+                  <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Allagash White</span><span class="dish-price">9</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Sierra Nevada Pale Ale</span><span class="dish-price">8</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Modelo Especial</span><span class="dish-price">8</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Stella Artois</span><span class="dish-price">8</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Miller Lite</span><span class="dish-price">7</span></div></div>
+                  <div class="dish"><div class="dish-top"><span class="dish-name">Athletic Run Wild IPA <span class="tag">NA</span></span><span class="dish-price">7</span></div></div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- ---------- HAPPY HOUR ---------- -->
+        <div class="tabpanel" role="tabpanel" id="panel-happy" aria-labelledby="tab-happy" tabindex="0" hidden>
+          <div class="wrap wrap--narrow" style="padding:0;">
+            <div class="hh-banner">
+              <div class="hh-banner-inner">
+                <h3>Happy Hour</h3>
+                <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+                <p>Monday – Friday &nbsp;·&nbsp; 3 – 6 PM</p>
+              </div>
+            </div>
+
+            <div class="menu-group">
+              <h3>Cocktails <span class="price-lead">$11</span></h3>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">The District Rickey</span></div>
+                <p class="dish-desc">Green Hat Gin, lime cordial, blackberry puree, soda water</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Golden Gate Spritz</span></div>
+                <p class="dish-desc">Prosecco, St-Germain elderflower, Meyer lemon, rosemary</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Pacific Sunset Highball</span></div>
+                <p class="dish-desc">Mezcal, Aperol, passionfruit, lime, sparkling mineral water</p>
+              </div>
+            </div>
+
+            <div class="menu-group">
+              <h3>Wine by the Glass <span class="price-lead">$9</span></h3>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Chardonnay — Kendall-Jackson "Vintner's Reserve" '24</span></div>
+                <p class="dish-desc"><span class="dish-origin">California</span></p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Sparkling Rosé — Soter Vineyards '21</span></div>
+                <p class="dish-desc"><span class="dish-origin">Willamette Valley, OR</span></p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Pinot Noir — A to Z Wineworks '23</span></div>
+                <p class="dish-desc"><span class="dish-origin">Oregon</span></p>
+              </div>
+            </div>
+
+            <div class="menu-group">
+              <h3>Beer <span class="price-lead">$6</span></h3>
+              <div class="dish"><div class="dish-top"><span class="dish-name">Stella Artois</span></div></div>
+              <div class="dish"><div class="dish-top"><span class="dish-name">Sierra Nevada Pale Ale</span></div></div>
+              <div class="dish"><div class="dish-top"><span class="dish-name">Atlas "Solar Power" Hazy IPA</span></div></div>
+            </div>
+
+            <div class="menu-group">
+              <h3>Bites</h3>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Pretzel Bites with Beer Cheese</span><span class="dish-price">$10</span></div>
+                <p class="dish-desc">Warm, soft-baked pretzel bites served with housemade beer cheese and whole grain mustard</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Fried Pickles</span><span class="dish-price">$9</span></div>
+                <p class="dish-desc">Crispy dill pickle chips served with housemade buttermilk ranch</p>
+              </div>
+              <div class="dish">
+                <div class="dish-top"><span class="dish-name">Pimento Cheese Dip</span><span class="dish-price">$10</span></div>
+                <p class="dish-desc">Southern-style pimento cheese with toasted baguette and fresh vegetables</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= PRIVATE EVENTS ================= -->
+  <div class="page" id="page-events" role="region" aria-label="Private events and catering">
+
+    <section class="section section--tight">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+          <p class="kicker">Washington, DC</p>
+          <h2>Parties &amp; Special Events</h2>
+          <p>Our semi-private and private dining spaces are perfect for your next family-style brunch, business lunch, reception, or dinner party.</p>
+        </div>
+
+        <figure class="event-hero">
+          <img src="images/dining-room-classic.jpg"
+               alt="Wood-panelled dining room with linen-set tables and ring pendant lighting"
+               loading="lazy" decoding="async" width="698" height="805">
+          <figcaption>Private dining room</figcaption>
+        </figure>
+
+        <div class="event-grid">
+          <div class="event-card">
+            <h3>Private Dining Room</h3>
+            <p class="rate">$100 room fee</p>
+            <dl style="margin:0;">
+              <div class="spec-line"><dt>Seated</dt><dd>10 – 24</dd></div>
+              <div class="spec-line"><dt>Reception</dt><dd>20 – 30</dd></div>
+            </dl>
+            <table class="mini-table">
+              <caption>Food &amp; Beverage Minimum</caption>
+              <thead><tr><th scope="col">Guests</th><th scope="col">Lunch</th><th scope="col">Dinner</th></tr></thead>
+              <tbody>
+                <tr><td>10 – 24</td><td>$800</td><td>$1,200</td></tr>
+                <tr><td>24 – 30</td><td>$1,200</td><td>$1,600</td></tr>
+              </tbody>
+            </table>
+            <p class="dish-desc" style="margin-top:12px;">Rates are estimated and differ based on day.</p>
+          </div>
+
+          <div class="event-card">
+            <h3>Full Restaurant Buyout</h3>
+            <p class="rate">$30,000</p>
+            <dl style="margin:0;">
+              <div class="spec-line"><dt>Seated</dt><dd>100 – 122</dd></div>
+              <div class="spec-line"><dt>Reception</dt><dd>122 – 137</dd></div>
+            </dl>
+            <table class="mini-table">
+              <caption>Food &amp; Beverage Minimum</caption>
+              <thead><tr><th scope="col">Guests</th><th scope="col">Lunch</th><th scope="col">Dinner</th></tr></thead>
+              <tbody>
+                <tr><td>100 – 122</td><td>$3,432</td><td>$4,880</td></tr>
+                <tr><td>122 – 137</td><td>$3,767</td><td>$5,612</td></tr>
+              </tbody>
+            </table>
+            <p class="dish-desc" style="margin-top:12px;">Rates are estimated and differ based on day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--paper2">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+          <h2>Features</h2>
+        </div>
+        <div class="pillars">
+          <div class="pillar">
+            <h3>Layout &amp; Capacity</h3>
+            <ul class="feature-list">
+              <li>Flexible seating — rounds, long family-style tables, lounge setups</li>
+              <li>Adjustable capacity from intimate gatherings to larger groups</li>
+              <li>Standing reception or seated dinner configurations</li>
+            </ul>
+          </div>
+          <div class="pillar">
+            <h3>Privacy &amp; Ambience</h3>
+            <ul class="feature-list">
+              <li>Partial enclosure separating the space while keeping energy from the bar</li>
+              <li>Dedicated entrance or check-in point</li>
+              <li>Adjustable lighting and curated sound control</li>
+            </ul>
+          </div>
+          <div class="pillar">
+            <h3>Amenities &amp; Support</h3>
+            <ul class="feature-list">
+              <li>Built-in AV, microphone and speaker setup</li>
+              <li>Dedicated event planner and private server or bartender</li>
+              <li>Custom menu cards, dessert or welcome station</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+          <h2>Packages</h2>
+          <p>Family-style menus include soft drinks, iced tea, hot tea, and drip coffee.</p>
+        </div>
+
+        <div class="event-grid">
+          <div class="event-card">
+            <h3>Private Dining — Lunch</h3>
+            <p class="rate">$38 <span style="font-size:13px;">per guest</span></p>
+            <ul class="feature-list">
+              <li>Select 2 small plates + greens</li>
+              <li>Select 3 from the sandwich list</li>
+              <li>Select 2 house sides</li>
+              <li>Select 1 dessert</li>
+            </ul>
+          </div>
+
+          <div class="event-card">
+            <h3>Private Dining — Dinner</h3>
+            <p class="rate">$45 <span style="font-size:13px;">per guest</span></p>
+            <ul class="feature-list">
+              <li>Select 2 small plates + greens</li>
+              <li>Select 3 entrées, plus sliders</li>
+              <li>Select 2 house sides</li>
+              <li>Select 1 dessert</li>
+            </ul>
+          </div>
+
+          <div class="event-card">
+            <h3>Premium Beverage Package</h3>
+            <p class="rate">$45 – $60 <span style="font-size:13px;">per guest</span></p>
+            <dl style="margin:0 0 14px;">
+              <div class="spec-line"><dt>2 hours</dt><dd>$45</dd></div>
+              <div class="spec-line"><dt>3 hours</dt><dd>$50</dd></div>
+              <div class="spec-line"><dt>4 hours</dt><dd>$60</dd></div>
+            </dl>
+            <p class="dish-desc">Green Hat Gin, mezcal, Catoctin Creek Roundstone Rye, Prosecco, premium wine, beer, and zero-proof drinks. Coffee, tea, and soft drink service included in all packages.</p>
+          </div>
+
+          <div class="event-card">
+            <h3>Daytime Package</h3>
+            <p class="rate">$30 – $38 <span style="font-size:13px;">per guest</span></p>
+            <dl style="margin:0 0 14px;">
+              <div class="spec-line"><dt>12:00 – 3:00 PM · 2 hours</dt><dd>$30</dd></div>
+              <div class="spec-line"><dt>12:00 – 3:00 PM · 3 hours</dt><dd>$38</dd></div>
+            </dl>
+            <p class="dish-desc">Simple cocktails, gin, light &amp; craft beer, mimosas, wine spritz, and zero-proof drinks.</p>
+          </div>
+
+          <div class="event-card">
+            <h3>Host Bar</h3>
+            <p class="rate">Per drink</p>
+            <p class="dish-desc">The host determines which beverages are offered, and all drinks are charged on a per-drink basis — beer, cocktails and martinis, house wine, juices and lemonade, and zero-proof beverages.</p>
+          </div>
+
+          <div class="event-card">
+            <h3>AV Equipment</h3>
+            <p class="rate">$250 <span style="font-size:13px;">per 3 hours</span></p>
+            <p class="dish-desc" style="margin-bottom:12px;">Basic Presentation Package: LCD projector, 6x6 ft screen, wireless handheld microphone, HDMI cable, extension cord, and laptop.</p>
+            <dl style="margin:0;">
+              <div class="spec-line"><dt>Additional microphone</dt><dd>$20</dd></div>
+              <div class="spec-line"><dt>Additional laptop</dt><dd>$60</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--paper2">
+      <div class="wrap wrap--narrow">
+        <div class="section-head">
+          <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+          <h2>Good to Know</h2>
+        </div>
+        <div class="frame">
+          <div class="frame-inner">
+            <dl style="margin:0;">
+              <div class="spec-line"><dt>Guaranteed count</dt><dd>2 weeks prior</dd></div>
+              <div class="spec-line"><dt>Service charge</dt><dd>20%</dd></div>
+              <div class="spec-line"><dt>Typical gratuity</dt><dd>18 – 22%</dd></div>
+              <div class="spec-line"><dt>Event planner fee</dt><dd>4%</dd></div>
+              <div class="spec-line"><dt>Corkage, per bottle</dt><dd>$30</dd></div>
+              <div class="spec-line"><dt>Valet parking, daily</dt><dd>$20</dd></div>
+              <div class="spec-line"><dt>Overtime, per 30 min</dt><dd>$150</dd></div>
+              <div class="spec-line"><dt>Catering selections due</dt><dd>24 hours prior</dd></div>
+            </dl>
+            <p class="dish-desc" style="margin-top:18px;">Cancellations must be made in writing. Full deposit refund at 6 months prior, 50% at 4 months, and no refund inside 2 weeks. A non-refundable deposit confirms any booking. We are a smoke-free restaurant.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+          <h2>Inquiries</h2>
+          <p>Reach out with your event type, date, guest count, timing, and any accommodations or allergens.</p>
+        </div>
+        <div class="contact-cards">
+          <div class="event-card contact-card">
+            <h3>Natalia Aguila</h3>
+            <p class="role">Special Events &amp; Catering Manager</p>
+            <p><a href="mailto:naguila@lettuce.com">naguila@lettuce.com</a></p>
+          </div>
+          <div class="event-card contact-card">
+            <h3>Alondra Vargas</h3>
+            <p class="role">Special Events &amp; Catering Manager</p>
+            <p><a href="mailto:alvargas@lettuce.com">alvargas@lettuce.com</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ================= VISIT ================= -->
+  <div class="page" id="page-visit" role="region" aria-label="Visit House 71">
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="diamond" aria-hidden="true"><span></span><span></span></div>
+          <h2>Visit</h2>
+          <p>A corner restaurant space in the historic Bowen Building, at the center of DC's East End.</p>
+        </div>
+
+        <div class="split">
+          <div class="split-text">
+            <h2>The Space</h2>
+            <p>House 71 takes the corner restaurant space in the newly renovated, historic Bowen Building at 15th and Eye Streets NW — a McPherson Square property neighboring the White House and home to JPMorgan Chase's regional HQ.</p>
+            <p>The corner exposure carries 32'6" of frontage and a patio opportunity along 15th Street, under 20-foot ceilings, between high office density and steady tourist traffic.</p>
+
+            <div class="spec-grid">
+              <div class="spec"><h4>Total Footprint</h4><p>± 3,842 sq ft</p></div>
+              <div class="spec"><h4>Ceiling Height</h4><p>20 ft</p></div>
+              <div class="spec"><h4>Frontage</h4><p>32' 6"</p></div>
+              <div class="spec"><h4>Seating</h4><p>115 guests</p></div>
+            </div>
+
+          </div>
+
+          <div class="split-media">
+            <img src="images/bar-room-arch.jpg"
+                 alt="Arched bar room with warm sconce lighting and hanging glassware"
+                 loading="lazy" decoding="async" width="698" height="805">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="info-grid">
+          <div class="info">
+            <h3>Find Us</h3>
+            <p>
+              The Bowen Building<br>
+              875 15th St NW<br>
+              Washington, DC 20005<br>
+              <span class="soft">At McPherson Square Metro</span>
+            </p>
+          </div>
+          <div class="info">
+            <h3>Hours</h3>
+            <p>
+              Open Daily<br>
+              12:00 PM – 9:30 PM<br>
+              <span class="soft">Happy Hour Mon – Fri, 3 – 6 PM</span>
+            </p>
+          </div>
+          <div class="info">
+            <h3>Events &amp; Catering</h3>
+            <p>
+              <a href="mailto:naguila@lettuce.com" style="color:inherit;">naguila@lettuce.com</a><br>
+              <a href="mailto:alvargas@lettuce.com" style="color:inherit;">alvargas@lettuce.com</a><br>
+              <span class="soft">Walk-ins welcome · Reservations encouraged</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <img class="mark" src="images/logo-wordmark-light.png" alt="House 71" width="1714" height="288">
+  <p class="tag-line">American Tavern · Washington DC</p>
+  <p>The Bowen Building &nbsp;·&nbsp; 875 15th St NW &nbsp;·&nbsp; Washington, DC 20005</p>
+  <p>Open daily 12:00 PM – 9:30 PM &nbsp;·&nbsp; Happy Hour Mon – Fri, 3 – 6 PM</p>
+  <p>&copy; 2026 House 71. Created for academic and internship presentation purposes.</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var ROUTES = ["home", "menu", "events", "visit"];
+  var TITLES = {
+    home:   "House 71 | American Tavern — Washington, DC",
+    menu:   "Menus | House 71",
+    events: "Private Events | House 71",
+    visit:  "Visit | House 71"
+  };
+
+  var pages = {};
+  ROUTES.forEach(function (id) { pages[id] = document.getElementById("page-" + id); });
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-link"));
+  var nav      = document.getElementById("siteNav");
+  var toggle   = document.getElementById("navToggle");
+
+  function closeNav() {
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  function normalize(hash) {
+    var id = (hash || "").replace(/^#\/?/, "");
+    return ROUTES.indexOf(id) !== -1 ? id : "home";
+  }
+
+  function render(route, shouldScroll) {
+    ROUTES.forEach(function (id) {
+      var active = id === route;
+      pages[id].classList.toggle("is-active", active);
+      if (active) {
+        pages[id].classList.remove("rise");
+        void pages[id].offsetWidth;
+        pages[id].classList.add("rise");
+      }
+    });
+
+    navLinks.forEach(function (link) {
+      if (link.dataset.route === route) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+
+    document.title = TITLES[route];
+    closeNav();
+    if (shouldScroll) window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function go(route) {
+    if (normalize(window.location.hash) === route) render(route, true);
+    else window.location.hash = "#/" + route;
+  }
+
+  window.addEventListener("hashchange", function () {
+    render(normalize(window.location.hash), true);
+  });
+
+  document.addEventListener("click", function (e) {
+    var trigger = e.target.closest("[data-route]");
+    if (trigger) go(trigger.dataset.route);
+  });
+
+  toggle.addEventListener("click", function () {
+    var open = nav.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
+
+  document.addEventListener("click", function (e) {
+    if (!nav.contains(e.target) && !toggle.contains(e.target)) closeNav();
+  });
+
+  /* ---------- Menu tabs (ARIA tabs pattern) ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+
+  var tablist = document.querySelector(".tablist-scroll");
+
+  function selectTab(tab, focus) {
+    tabs.forEach(function (t) {
+      var selected = t === tab;
+      t.setAttribute("aria-selected", selected ? "true" : "false");
+      t.tabIndex = selected ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !selected;
+    });
+
+    // Keep the active tab visible in the horizontal strip without
+    // letting it scroll the page vertically.
+    if (tablist) {
+      var tabBox = tab.getBoundingClientRect();
+      var stripBox = tablist.getBoundingClientRect();
+      if (tabBox.left < stripBox.left || tabBox.right > stripBox.right) {
+        tablist.scrollLeft += tabBox.left - stripBox.left
+                            - (stripBox.width - tabBox.width) / 2;
+      }
+    }
+
+    if (focus) tab.focus({ preventScroll: true });
+  }
+
+  // Panels differ wildly in height, so switching tabs while scrolled down
+  // used to strand you mid-page. Snap back to the top of the tab strip.
+  function selectTabFromClick(tab) {
+    var before = tablist ? tablist.getBoundingClientRect().top : 0;
+    selectTab(tab, false);
+    if (tablist && before < 0) {
+      var y = window.pageYOffset + tablist.getBoundingClientRect().top
+            - (parseFloat(getComputedStyle(document.documentElement)
+                .getPropertyValue("--header-h")) || 76) - 12;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { selectTabFromClick(tab); });
+    tab.addEventListener("keydown", function (e) {
+      var next = null;
+      if (e.key === "ArrowRight")     next = tabs[(i + 1) % tabs.length];
+      else if (e.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+      else if (e.key === "Home")      next = tabs[0];
+      else if (e.key === "End")       next = tabs[tabs.length - 1];
+      if (next) { e.preventDefault(); selectTab(next, true); }
+    });
+  });
+
+  render(normalize(window.location.hash), false);
+})();
+</script>
+
+</body>
+</html>
